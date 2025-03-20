@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Classifier</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 320px;
+        }
+        input {
+            padding: 10px;
+            border: 2px solid #ff758c;
+            border-radius: 5px;
+            outline: none;
+            width: 80%;
+            margin-bottom: 10px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            background: #ff758c;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background: #ff5252;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        span {
+            font-weight: bold;
+            color: #ff5252;
+        }
+        .loading {
+            display: none;
+            margin-top: 10px;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Smart Text Classifier</h1>
+        <input type="text" id="wordInput" placeholder="Enter a word">
+        <button onclick="classifyWord()">Classify</button>
+        <p class="loading">🔄 Analyzing...</p>
+        <p class="result" id="resultText"></p>
+    </div>
+
+    <script>
+        function classifyWord() {
+            const wordInput = document.getElementById("wordInput").value.trim();
+            const resultText = document.getElementById("resultText");
+            const loading = document.querySelector(".loading");
+
+            if (wordInput === "") {
+                alert("Please enter a word!");
+                return;
+            }
+
+            resultText.style.opacity = 0;  // Hide result
+            loading.style.display = "block"; // Show loading
+
+            fetch("/classify", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ word: wordInput })
+            })
+            .then(response => response.json())
+            .then(data => {
+                loading.style.display = "none"; // Hide loading
+                resultText.innerHTML = `'${wordInput}' is classified as: <span>${data.result}</span>`;
+                resultText.style.opacity = 1;  // Show result with fade-in effect
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                loading.style.display = "none";
+                resultText.innerHTML = "❌ Error processing word.";
+                resultText.style.opacity = 1;
+            });
+        }
+    </script>
+</body>
+</html>

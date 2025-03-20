@@ -1,57 +1,110 @@
-# 🧠 SmartTextClassifier - A Simple Machine Learning Text Categorizer
+Here’s a well-structured **README.md** file for your **Word Classifier** project. 🚀  
 
-## 📌 Project Overview
-SmartTextClassifier is a simple machine learning model that predicts whether an input word belongs to the category of **animal, object, or person**. It uses a **Naïve Bayes classifier** with a **bag-of-words approach** to make predictions.
+---
 
-## 🚀 Features
-- Classifies words into **Animal**, **Object**, or **Person**.
-- Uses **scikit-learn's Naïve Bayes model** for classification.
-- Simple **command-line interface** for easy usage.
-- Expandable with a **larger dataset**.
+### **📌 README.md**
+```md
+# 📝 Word Classifier - AI-Powered Text Classification
 
-## 🛠 Installation & Setup
-### Step 1: Clone the Repository
-```bash
-git clone https://github.com/yourusername/SmartTextClassifier.git
-cd SmartTextClassifier
+A **simple and interactive word classifier** that predicts whether a word belongs to a **person, object, or animal** using **Flask & Machine Learning (Naive Bayes)**. 🚀
+
+![Classifier UI](https://user-images.githubusercontent.com/12345678/example-image.png) <!-- Add a relevant image -->
+
+---
+
+## 📜 Features
+✅ **Real-time Classification** (No Page Refresh)  
+✅ **Modern UI with Animations** ✨  
+✅ **AJAX (Fetch API) for Smooth Experience**  
+✅ **Python & Flask Backend with ML Model**  
+✅ **Instant Word Classification with Naive Bayes**  
+
+---
+
+## 🛠️ Tech Stack
+- **Frontend:** HTML, CSS, JavaScript  
+- **Backend:** Python (Flask)  
+- **Machine Learning:** Scikit-learn (Naive Bayes)  
+
+---
+
+## 🚀 Installation & Setup
+
+### **🔹 Step 1: Clone the Repository**
+```sh
+git clone https://github.com/your-username/word-classifier.git
+cd word-classifier
 ```
 
-### Step 2: Install Dependencies
-Ensure you have Python installed. Then, install the required libraries:
-```bash
-pip install scikit-learn
+### **🔹 Step 2: Install Dependencies**
+```sh
+pip install flask scikit-learn
 ```
 
-### Step 3: Run the Classifier
-Execute the following command to start the classifier:
-```bash
-python text_classifier.py
+### **🔹 Step 3: Run the Flask App**
+```sh
+python app.py
 ```
 
-### Step 4: Input Words
-Once the program runs, you can enter words like:
-```
-Enter a word (or 'exit' to quit): cow
-'cow' is classified as: animal
-```
+### **🔹 Step 4: Open in Browser**
+Go to **http://127.0.0.1:5000/** 🌍
+
+---
 
 ## 📂 Project Structure
 ```
-SmartTextClassifier/
-│── text_classifier.py  # Main Python script for classification
-│── README.md           # Project documentation (this file)
+word-classifier/
+│── static/                # Static assets (CSS, JS, Images)
+│── templates/             # HTML Templates
+│   ├── index.html         # Main UI file
+│── app.py                 # Flask Backend
+│── README.md              # Project Documentation
+│── requirements.txt       # Dependencies
 ```
 
-## 📈 Future Improvements
-- Add more **categories** (e.g., place, food, emotion).
-- Implement a **GUI** version using Tkinter or Flask.
-- Train the model with a **larger dataset** for better accuracy.
+---
 
-## 🤝 Contributing
-Feel free to **fork** this project and add improvements! 😊
-
-## 📜 License
-This project is open-source and available under the **MIT License**.
+## 🎨 UI Preview
+<!-- Add a screenshot of your project UI -->
+![UI Preview](https://user-images.githubusercontent.com/12345678/example-ui.png)
 
 ---
-🚀 **Enjoy SmartTextClassifier and start classifying words intelligently!**
+
+## 🔥 API Endpoints
+| Method | Endpoint   | Description |
+|--------|-----------|-------------|
+| `GET`  | `/`       | Loads the main page |
+| `POST` | `/classify` | Classifies the entered word |
+
+---
+
+## 📌 Future Enhancements
+- 🔹 Improve Machine Learning Model  
+- 🔹 Add Synonyms & More Categories  
+- 🔹 Deploy Online Using Heroku/Vercel  
+
+---
+
+## 🛠️ Contributing
+Feel free to **fork** this repository, open issues, and submit pull requests! 🚀
+
+---
+
+## 🏆 Credits
+Developed by **[Your Name](https://github.com/your-username)** 💡  
+
+---
+
+## 📜 License
+This project is licensed under the **MIT License**.
+
+---
+```
+
+---
+
+### **📌 Next Steps**
+- 📸 **Add UI Screenshots** (Replace `example-image.png` with your actual images)  
+- 🌐 **Update GitHub Link** (Replace `your-username` with your actual username)  
+
+This **README.md** makes your project look **professional & structured**! 🚀 Let me know if you need modifications. 🔥
