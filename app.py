@@ -1,43 +1,28 @@
-from flask import Flask, render_template, request, jsonify
-from sklearn.feature_extraction.text import CountVectorizer
-from sklearn.naive_bayes import MultinomialNB
-from sklearn.pipeline import make_pipeline
+from flask import Flask, render_template, request, jsonify, url_for
 
 app = Flask(__name__)
 
-# Training Data
-words = [
-    "dog", "cat", "elephant", "lion", "tiger", "giraffe", "zebra", "monkey", "kangaroo", "penguin",
-    "car", "table", "chair", "phone", "pen", "laptop", "book", "cup", "bottle", "keyboard",
-    "John", "Alice", "doctor", "teacher", "engineer", "nurse", "artist", "lawyer", "scientist", "student"
-]
-labels = [
-    "animal", "animal", "animal", "animal", "animal", "animal", "animal", "animal", "animal", "animal",
-    "object", "object", "object", "object", "object", "object", "object", "object", "object", "object",
-    "person", "person", "person", "person", "person", "person", "person", "person", "person", "person"
-]
+@app.route('/')
+def index():
+    return render_template('index.html')
 
-# Train Model
-model = make_pipeline(CountVectorizer(), MultinomialNB())
-model.fit(words, labels)
-
-# Debug: Check model predictions on training data
-for word, label in zip(words, labels):
-    prediction = model.predict([word])[0]
-    print(f"Word: {word}, True Label: {label}, Predicted Label: {prediction}")
-
-@app.route("/")
-def home():
-    return render_template("index.html")
-
-@app.route("/classify", methods=["POST"])
-def classify():
+@app.route('/classify', methods=['POST'])
+def classify_word():
     data = request.get_json()
-    word = data.get("word", "")
-    if word:
-        prediction = model.predict([word])[0]
-        return jsonify({"result": prediction})
-    return jsonify({"result": "Unknown"})
+    word = data.get('word')
 
-if __name__ == "__main__":
+    # Dummy logic for classification
+    if word.lower() in ['cat', 'dog', 'animal']:
+        result = 'Animal'
+        image_url = url_for('static', filename='images/pexels-svetozar-milashevich-99573-1490908.jpg')
+    elif word.lower() in ['doctor', 'physician', 'person']:
+        result = 'Person'
+        image_url = url_for('static', filename='images/male-doctor-smiling-happy-face-600nw-2481032615.webp')
+    else:
+        result = 'Object'
+        image_url = url_for('static', filename='images/NationalGeographic_1468962.avif')
+
+    return jsonify({'result': result, 'image_url': image_url})
+
+if __name__ == '__main__':
     app.run(debug=True)

@@ -56,9 +56,12 @@
             display: none;
             margin-top: 10px;
         }
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
+        img {
+            margin-top: 20px;
+            width: 200px;
+            height: auto;
+            border-radius: 5px;
+            display: none;
         }
     </style>
 </head>
@@ -69,6 +72,7 @@
         <button onclick="classifyWord()">Classify</button>
         <p class="loading">🔄 Analyzing...</p>
         <p class="result" id="resultText"></p>
+        <img id="image" src="" alt="Classification Image">
     </div>
 
     <script>
@@ -76,6 +80,7 @@
             const wordInput = document.getElementById("wordInput").value.trim();
             const resultText = document.getElementById("resultText");
             const loading = document.querySelector(".loading");
+            const img = document.getElementById("image");
 
             if (wordInput === "") {
                 alert("Please enter a word!");
@@ -84,6 +89,7 @@
 
             resultText.style.opacity = 0;  // Hide result
             loading.style.display = "block"; // Show loading
+            img.style.display = "none"; // Hide image initially
 
             fetch("/classify", {
                 method: "POST",
@@ -95,6 +101,10 @@
                 loading.style.display = "none"; // Hide loading
                 resultText.innerHTML = `'${wordInput}' is classified as: <span>${data.result}</span>`;
                 resultText.style.opacity = 1;  // Show result with fade-in effect
+                if (data.image_url) {
+                    img.src = data.image_url;
+                    img.style.display = "block"; // Show image if available
+                }
             })
             .catch(error => {
                 console.error("Error:", error);
